@@ -3,18 +3,17 @@
 This is the README for your extension "hoot". After writing up a brief description, we recommend including the following sections.
 
 ## Features
-search for articles
-automatically put them into a bib
-have notes pop up when reading an article
-have notes be stored in a db but can have them collated outside of db
-have custom fields for article
-have time management with pomodoro and tracking
-web of references
-commenting on snippets
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-wakatime might be useful
-reading type progress tracker
-special button for adding to a reading list (part of web of references)
+- search for articles
+- automatically put them into a bib
+- have separate persistant notes page pop up when reading an article
+- have notes be stored in a db but can have them collated outside of db
+- have custom fields for article
+- have time management with pomodoro and tracking
+- web of references
+- commenting on snippets
+- wakatime might be useful
+- reading type progress tracker
+- special button for adding to a reading list (part of web of references)
 For example if there is an image subfolder under your extension project workspace:
 
 \!\[feature X\]\(images/feature-x.png\)
