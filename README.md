@@ -10,6 +10,7 @@ This is the README for your extension "hoot". After writing up a brief descripti
 - have custom fields for article
 - have time management with pomodoro and tracking
 - web of references
+- web of references context link
 - commenting on snippets
 - wakatime might be useful
 - reading type progress tracker
