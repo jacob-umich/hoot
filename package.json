@@ -21,7 +21,15 @@
         "command": "hoot.searchArticle",
         "title": "Search Articles"
       }
-    ]
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "hootRef",
+          "name": "References"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",
