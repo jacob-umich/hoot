@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const {getJson} = require("serpapi")
+const fs = require("fs")
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -15,6 +16,10 @@ function activate(context) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "hoot" is now active!');
 
+	if (!fs.existsSync(vscode.workspace.rootPath+'/project_db.json')){
+		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','[]')
+	}
+
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -24,6 +29,7 @@ function activate(context) {
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Hello World from Hoot!');
 	});
+
 
 	async function findArticle(){
 		let search = await vscode.window.showInputBox({prompt:'enter in search params'})
@@ -43,21 +49,26 @@ function activate(context) {
 		})
 		let article = resp['organic_results'][pickInd]
 		console.log(article)
-		const panel = vscode.window.createWebviewPanel(
-			article.title,
-			article.title,
-			vscode.ViewColumn.One,
-			{}
-		)
-		panel.webview.html = getWebviewContent(article.link)
 		vscode.env.openExternal(article.link)
+		let id = article.result_id
+
+		let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath+'/project_db.json','utf-8'))
+
+		data.push(
+			{
+				id:id,
+				title:article.title
+			}
+		)
+
+		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json',JSON.stringify(data))
 		
 		// record selected in bib and open link
 		// have a notification pop up saying the name of the reference
 
 	}
 
-	let findArticleComm = vscode.commands.registerCommand('hoot.searchArticle',findArticle)
+	let findArticleComm = vscode.commands.registerCommand('hoot.findArticle',findArticle)
 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(findArticleComm);
@@ -71,16 +82,3 @@ module.exports = {
 	deactivate
 }
 
-function getWebviewContent(link) {
-	return `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-	  <meta charset="UTF-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <title>Cat Coding</title>
-  </head>
-  <body>
-  	<iframe src="${link}" frameborder="0" style="width:100vw; height:100vh"></iframe>
-  </body>
-  </html>`;
-  }

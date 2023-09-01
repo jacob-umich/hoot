@@ -15,6 +15,8 @@ This is the README for your extension "hoot". After writing up a brief descripti
 - wakatime might be useful
 - reading type progress tracker
 - special button for adding to a reading list (part of web of references)
+- add option to add a description which gets added to skim read
+- imbedded notes go into deep read section
 For example if there is an image subfolder under your extension project workspace:
 
 \!\[feature X\]\(images/feature-x.png\)
@@ -72,3 +74,5 @@ You can author your README using Visual Studio Code.  Here are some useful edito
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
+
+
