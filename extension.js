@@ -3,6 +3,7 @@
 const vscode = require('vscode');
 const {getJson} = require("serpapi")
 const fs = require("fs")
+const child_process  =require('child_process')
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -72,6 +73,19 @@ function activate(context) {
 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(findArticleComm);
+
+	async function readArticle(){
+		console.log('read')
+		article=buttonclick()
+		pyAnalyze = child_process.spawn('python',['analyze.py','notes',article])
+		event(article,onsave)
+	}
+
+	async function associateArticle(){
+		articleJson = fromButtonClick
+		pdf = fromSelectLaunch
+		articleJson.pdf=pdf
+	} 
 }
 
 // This method is called when your extension is deactivated
