@@ -14,49 +14,7 @@ const child_process  =require('child_process')
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	class hootReference extends vscode.TreeDataProvider{
-		constructor() {  }
-	  
-		getTreeItem(element) {
-		  // get from db?
-		  return element;
-		}
-	  
-		getChildren(element) {
-	  
-		  if (element) {
-			return undefined;
-		  } else {
-			let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath +"project_db.json"))
-			return this.getRefItems(data)
-		  }
-		}
-	  
-		getRefItems(database) {
-		  const toRep = (label)=> {
-			return new topRef(
-			  label,
-			  vscode.TreeItemCollapsibleState.None
-			);
-		  }
-	  
-		  let refs = new Array
-		  for (let dataRef in database){
-			refs.push(toRep(dataRef['id']))
-		  }
-		  return refs
-		  }
-	  }
-	  
-	  class topRef extends vscode.TreeItem {
-		constructor(
-		  label,
-		  collapsibleState
-		) {
-		  super(label, collapsibleState);
-		}
-	  }
-
+	
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "hoot" is now active!');
