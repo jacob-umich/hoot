@@ -1,8 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.hootReference = void 0;
+
 const vscode = require('vscode')
 const fs = require('fs')
 
-class hootReference extends vscode.TreeDataProvider{
-  constructor() {  }
+class hootReference{
+  constructor(root) {
+    this.root=root;
+  }
 
   getTreeItem(element) {
     // get from db?
@@ -12,10 +18,10 @@ class hootReference extends vscode.TreeDataProvider{
   getChildren(element) {
 
     if (element) {
-      return undefined;
+      return Promise.resolve([]);
     } else {
-      let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath +"project_db.json"))
-      return this.getRefItems(data)
+      let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath +"/project_db.json"))
+      return Promise.resolve(this.getRefItems(data));
     }
   }
 
@@ -29,12 +35,12 @@ class hootReference extends vscode.TreeDataProvider{
 
     let refs = new Array
     for (let dataRef in database){
-      refs.push(toRep(dataRef['id']))
+      refs.push(toRep(database[dataRef]['id']))
     }
     return refs
     }
 }
-
+exports.hootReference = hootReference;
 class topRef extends vscode.TreeItem {
   constructor(
     label,

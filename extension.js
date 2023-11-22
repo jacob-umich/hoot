@@ -1,10 +1,11 @@
+"use strict"
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const {getJson} = require("serpapi")
 const fs = require("fs")
 const child_process  =require('child_process')
-
+const hootReference = require("./webOfRef")
 
 
 // This method is called when your extension is activated
@@ -23,8 +24,14 @@ function activate(context) {
 		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','[]')
 	}
 
-	vscode.window.registerTreeDataProvider('hoot', new hootReference())
-
+	vscode.window.registerTreeDataProvider('hootRef', new hootReference.hootReference(vscode.workspace.rootPath))
+    vscode.window.createTreeView('hootRef', {
+        treeDataProvider: new hootReference.hootReference(vscode.workspace.rootPath)
+    });
+	vscode.window.registerTreeDataProvider('hootRef2', new hootReference.hootReference(vscode.workspace.rootPath))
+    vscode.window.createTreeView('hootRef2', {
+        treeDataProvider: new hootReference.hootReference(vscode.workspace.rootPath)
+    });
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -78,18 +85,18 @@ function activate(context) {
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(findArticleComm);
 
-	async function readArticle(){
-		console.log('read')
-		article=buttonclick()
-		pyAnalyze = child_process.spawn('python',['analyze.py','notes',article])
-		event(article,onsave)
-	}
+	// async function readArticle(){
+	// 	console.log('read')
+	// 	article=buttonclick()
+	// 	pyAnalyze = child_process.spawn('python',['analyze.py','notes',article])
+	// 	event(article,onsave)
+	// }
 
-	async function associateArticle(){
-		articleJson = fromButtonClick
-		pdf = fromSelectLaunch
-		articleJson.pdf=pdf
-	} 
+	// async function associateArticle(){
+	// 	articleJson = fromButtonClick
+	// 	pdf = fromSelectLaunch
+	// 	articleJson.pdf=pdf
+	// } 
 }
 
 // This method is called when your extension is deactivated

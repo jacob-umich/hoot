@@ -79,10 +79,10 @@
       ],
       "hoot":[
         {
-          "id": "reader",
-          "name": "reader",
+          "id": "hootRef2",
+          "name": "References",
           "icon": "icon.svg",
-          "contextualTitle": "reader"
+          "contextualTitle": "References"
         }
       ]
     },
