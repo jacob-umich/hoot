@@ -1,6 +1,4 @@
-# hoot README
-
-This is the README for your extension "hoot". After writing up a brief description, we recommend including the following sections.
+hoot is a visual studio code extension that acts as a reference manager, task manager, and note-taking tool. It is designed to help researchers be more efficient. Visual studio code can be used for all research aspects, like writing papers, running simulations, or reading articles, because it is essentially just an extensible text editor with a nice interface. hoot aims to create synergy between these ideas.
 
 ## Features
 - search for articles
@@ -60,19 +58,6 @@ Added features X, Y, and Z.
 
 ---
 
-## Working with Markdown
 
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
 
 
