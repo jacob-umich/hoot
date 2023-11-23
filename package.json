@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "commands": [
       {
@@ -22,52 +22,36 @@
         "title": "Search Articles"
       },
       {
-        "command": "nodeDependencies.refreshEntry",
-        "title": "Refresh",
-        "icon": {
-          "light": "resources/light/refresh.svg",
-          "dark": "resources/dark/refresh.svg"
+        "command": "hoot.addArticle",
+        "title": "Add Articles",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
         }
       },
       {
-        "command": "nodeDependencies.addEntry",
-        "title": "Add"
-      },
-      {
-        "command": "nodeDependencies.editEntry",
-        "title": "Edit",
-        "icon": {
-          "light": "resources/light/edit.svg",
-          "dark": "resources/dark/edit.svg"
+        "command": "hoot.addBibs",
+        "title": "Import Bib",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
         }
-      },
-      {
-        "command": "nodeDependencies.deleteEntry",
-        "title": "Delete"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "nodeDependencies.refreshEntry",
-          "when": "view == nodeDependencies",
+          "command": "hoot.addArticle",
+          "when": "view == hootRef2",
           "group": "navigation"
         },
         {
-          "command": "nodeDependencies.addEntry",
-          "when": "view == nodeDependencies"
+          "command": "hoot.addBibs",
+          "when": "view == hootRef2",
+          "group": "navigation"
         }
       ],
       "view/item/context": [
-        {
-          "command": "nodeDependencies.editEntry",
-          "when": "view == nodeDependencies && viewItem == dependency",
-          "group": "inline"
-        },
-        {
-          "command": "nodeDependencies.deleteEntry",
-          "when": "view == nodeDependencies && viewItem == dependency"
-        }
       ]
     },
     "views": {

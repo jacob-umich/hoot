@@ -6,6 +6,7 @@ const {getJson} = require("serpapi")
 const fs = require("fs")
 const child_process  =require('child_process')
 const hootReference = require("./webOfRef")
+const {addBib,loadAllBibs}=require("./addArticle"); 
 
 
 // This method is called when your extension is activated
@@ -23,14 +24,14 @@ function activate(context) {
 	if (!fs.existsSync(vscode.workspace.rootPath+'/project_db.json')){
 		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','[]')
 	}
-
-	vscode.window.registerTreeDataProvider('hootRef', new hootReference.hootReference(vscode.workspace.rootPath))
+	const treeviewObj = new hootReference.hootReference(vscode.workspace.rootPath)
+	vscode.window.registerTreeDataProvider('hootRef', treeviewObj)
     vscode.window.createTreeView('hootRef', {
-        treeDataProvider: new hootReference.hootReference(vscode.workspace.rootPath)
+        treeDataProvider: treeviewObj
     });
-	vscode.window.registerTreeDataProvider('hootRef2', new hootReference.hootReference(vscode.workspace.rootPath))
+	vscode.window.registerTreeDataProvider('hootRef2', treeviewObj)
     vscode.window.createTreeView('hootRef2', {
-        treeDataProvider: new hootReference.hootReference(vscode.workspace.rootPath)
+        treeDataProvider: treeviewObj
     });
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
@@ -41,6 +42,8 @@ function activate(context) {
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Hello World from Hoot!');
 	});
+
+	let db_path = vscode.workspace.rootPath+'/project_db.json';
 
 
 	async function findArticle(){
@@ -63,13 +66,15 @@ function activate(context) {
 		console.log(article)
 		vscode.env.openExternal(article.link)
 		let id = article.result_id
+		
 
 		let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath+'/project_db.json','utf-8'))
 
 		data.push(
 			{
 				id:id,
-				title:article.title
+				title:article.title,
+				
 			}
 		)
 
@@ -81,9 +86,17 @@ function activate(context) {
 	}
 
 	let findArticleComm = vscode.commands.registerCommand('hoot.findArticle',findArticle)
+	let addArticleComm = vscode.commands.registerCommand('hoot.addArticle',()=>{addBib(db_path,treeviewObj)});
+	let addBibsComm = vscode.commands.registerCommand('hoot.addBibs',async ()=>{
+		let ref_path = await vscode.window.showInputBox({prompt:'enter .bib path'})
+		ref_path = vscode.workspace.rootPath + "/" +ref_path;
+		loadAllBibs(db_path,treeviewObj,ref_path)
+	});
 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(findArticleComm);
+	context.subscriptions.push(addArticleComm);
+	context.subscriptions.push(addBibsComm);
 
 	// async function readArticle(){
 	// 	console.log('read')
