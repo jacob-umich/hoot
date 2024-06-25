@@ -30,6 +30,14 @@
         }
       },
       {
+        "command": "hoot.refresh",
+        "title": "Refresh",
+        "icon":{
+          "dark": "refresh.svg",
+          "light": "refresh.svg"
+        }
+      },
+      {
         "command": "hoot.addBibs",
         "title": "Import Bib",
         "icon":{
@@ -47,6 +55,11 @@
         },
         {
           "command": "hoot.addBibs",
+          "when": "view == hootRef2",
+          "group": "navigation"
+        },
+        {
+          "command": "hoot.refresh",
           "when": "view == hootRef2",
           "group": "navigation"
         }

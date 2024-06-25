@@ -6,28 +6,29 @@ const vscode = require('vscode')
 const fs = require('fs')
 
 class hootReference{
-  _onDidChangeTreeData = new vscode.EventEmitter;
+  _onDidChangeTreeData = new vscode.EventEmitter();
   onDidChangeTreeData = this._onDidChangeTreeData.event
   constructor(root) {
     this.root=root;
+    // re arrange data so category is on top
   }
   refresh(){
     this._onDidChangeTreeData.fire();
   }
-
+  
   getTreeItem(element) {
-    // get from db?
-    return element;
+  // get from db?
+  return element;
   }
-
+  
   getChildren(element) {
-
+    
     if (element instanceof topRef) {
-
+      
       return Promise.resolve(this.getRefMeta(element.meta));
     } else {
-      let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath +"/project_db.json"))
-      return Promise.resolve(this.getRefItems(data));
+      this.data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath +"/project_db.json"))
+      return Promise.resolve(this.getRefItems());
     }
   }
   getRefMeta(ref){
@@ -49,7 +50,7 @@ class hootReference{
     }
     return meta
   }
-  getRefItems(database) {
+  getRefItems() {
     const toRep = (data)=> {
       return new topRef(
         data,
@@ -58,14 +59,34 @@ class hootReference{
     }
 
     let refs = new Array
-    for (let dataRef in database){
-      refs.push(toRep(database[dataRef]))
+    for (let dataRef in this.data){
+      refs.push(toRep(this.data[dataRef]))
     }
     return refs
     }
-  
+  // getCatItem()
 }
 exports.hootReference = hootReference;
+
+class refCat extends vscode.TreeItem {
+  constructor(
+    data,
+    collapsibleState
+  ) {
+    let label = data['name']
+    super(label, collapsibleState);
+    this.meta = [
+      {author:data["author"]},
+      {id:data["id"]},
+      {title:data["title"]},
+      {year:data["year"]},
+      {journal:data["journal"]},
+      {pdfPath:data["pdfPath"]},
+      {tags:data["tags"]},
+    ]
+  }
+}
+
 class topRef extends vscode.TreeItem {
   constructor(
     data,
