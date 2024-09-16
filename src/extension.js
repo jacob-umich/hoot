@@ -4,117 +4,54 @@
 const vscode = require('vscode');
 const {getJson} = require("serpapi")
 const fs = require("fs")
-const child_process  =require('child_process')
 const hootReference = require("./webOfRef")
+const detailView = require("./webviewtest")
 const {addBib,loadAllBibs}=require("./addArticle"); 
+const hootCommands = require("./commands")
 
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "hoot" is now active!');
-
+	console.log(context.extensionPath)
+	console.log(context.extensionUri)
 	if (!fs.existsSync(vscode.workspace.rootPath+'/project_db.json')){
 		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','[]')
 	}
-	const treeviewObj = new hootReference.hootReference(vscode.workspace.rootPath)
+
+	const detailsView = new detailView(context)
+	const treeviewObj = new hootReference.hootReference(vscode.workspace.rootPath,detailsView)
+
 	vscode.window.registerTreeDataProvider('hootRef', treeviewObj)
     vscode.window.createTreeView('hootRef', {
         treeDataProvider: treeviewObj
-    });
-	vscode.window.registerTreeDataProvider('hootRef2', treeviewObj)
-    vscode.window.createTreeView('hootRef2', {
-        treeDataProvider: treeviewObj
-    });
-	vscode.commands.registerCommand('hoot.refresh', () => treeviewObj.refresh());
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('hoot.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+     });
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Hoot!');
-	});
-
+	 
 	let db_path = vscode.workspace.rootPath+'/project_db.json';
-
-
-	async function findArticle(){
-		let search = await vscode.window.showInputBox({prompt:'enter in search params'})
-		let resp = await getJson({
-			engine: "google_scholar",
-			api_key: "9779a8042dce2f0545408e1fac4755b5d09edf3ee537b735806e0239a8e017ef",
-			q: search,
-		})
-		console.log(resp['organic_results'][0])
-		let searchRes = new Array
-		for (let i=0;i<5;i++){
-			searchRes.push(resp['organic_results'][i]['title'])
-		}
-		let pickTitle = await vscode.window.showQuickPick(searchRes)
-		let pickInd = resp['organic_results'].findIndex((result)=>{
-			return result.title == pickTitle
-		})
-		let article = resp['organic_results'][pickInd]
-		console.log(article)
-		vscode.env.openExternal(article.link)
-		let id = article.result_id
-		
-
-		let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath+'/project_db.json','utf-8'))
-
-		data.push(
-			{
-				id:id,
-				title:article.title,
-				
-			}
-		)
-
-		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json',JSON.stringify(data))
-		
-		// record selected in bib and open link
-		// have a notification pop up saying the name of the reference
-
-	}
-
-	let findArticleComm = vscode.commands.registerCommand('hoot.findArticle',findArticle)
+	let detailViewRegister = vscode.window.registerWebviewViewProvider('hoot.detailsView',detailsView)
+	let findArticleComm = vscode.commands.registerCommand('hoot.findArticle',hootCommands.findArticle)
+	vscode.commands.registerCommand('hoot.refresh', () => treeviewObj.refresh());
 	let addArticleComm = vscode.commands.registerCommand('hoot.addArticle',()=>{addBib(db_path,treeviewObj)});
 	let addBibsComm = vscode.commands.registerCommand('hoot.addBibs',async ()=>{
 		let ref_path = await vscode.window.showInputBox({prompt:'enter .bib path'})
 		ref_path = vscode.workspace.rootPath + "/" +ref_path;
 		loadAllBibs(db_path,treeviewObj,ref_path)
 	});
-
-	context.subscriptions.push(disposable);
+	let viewCatCommand = vscode.commands.registerCommand('hoot.viewCat',hootCommands.viewItem)
+	let editCatCommand = vscode.commands.registerCommand('hoot.editCat',hootCommands.renameCategory)
+	vscode.commands.registerCommand('hoot.addCat',hootCommands.addCategory)
+	context.subscriptions.push(detailViewRegister);
 	context.subscriptions.push(findArticleComm);
 	context.subscriptions.push(addArticleComm);
 	context.subscriptions.push(addBibsComm);
-
-	// async function readArticle(){
-	// 	console.log('read')
-	// 	article=buttonclick()
-	// 	pyAnalyze = child_process.spawn('python',['analyze.py','notes',article])
-	// 	event(article,onsave)
-	// }
-
-	// async function associateArticle(){
-	// 	articleJson = fromButtonClick
-	// 	pdf = fromSelectLaunch
-	// 	articleJson.pdf=pdf
-	// } 
 }
 
-// This method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() {
+
+
+}
 
 module.exports = {
 	activate,

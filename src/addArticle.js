@@ -39,9 +39,9 @@ async function addArticle(db_path,treeviewObj){
     fs.writeFileSync(db_path,JSON.stringify(data,null,4))
     treeviewObj.refresh();
 }
-async function addBib(db_path,treeviewObj,bib=undefined){
+async function  addBib(db_path,treeviewObj,bib=undefined){
     if (!bib){
-        let bib = await vscode.window.showInputBox({prompt:'enter new article bib'});
+        bib = await vscode.window.showInputBox({prompt:'enter new article bib'});
     }
     let id = generateUUID()
     let newData = {
@@ -56,11 +56,12 @@ async function addBib(db_path,treeviewObj,bib=undefined){
         notes:[],
         inlineNotes:[],
         tags:"",
-        bibtex:bib
+        bibtex:bib,
+        category:0
     }
     let data = JSON.parse(fs.readFileSync(db_path,'utf-8'));
 
-    data.push(newData);
+    data["references"].push(newData);
 
     fs.writeFileSync(db_path,JSON.stringify(data,null,4))
     treeviewObj.refresh();

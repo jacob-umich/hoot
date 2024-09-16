@@ -14,10 +14,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "hoot.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "hoot.findArticle",
         "title": "Search Articles"
       },
@@ -44,42 +40,74 @@
           "dark": "icon.svg",
           "light": "icon.svg"
         }
+      },
+      {
+        "command": "hoot.viewCat",
+        "title": "View",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
+        }
+      },
+      {
+        "command": "hoot.editCat",
+        "title": "Edit Category",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
+        }
+      },
+      {
+        "command": "hoot.addCat",
+        "title": "Add Category",
+        "icon":{
+          "dark": "addCat.svg",
+          "light": "addCat.svg"
+        }
       }
     ],
     "menus": {
       "view/title": [
         {
           "command": "hoot.addArticle",
-          "when": "view == hootRef2",
+          "when": "view == hootRef",
           "group": "navigation"
         },
         {
           "command": "hoot.addBibs",
-          "when": "view == hootRef2",
+          "when": "view == hootRef",
           "group": "navigation"
         },
         {
           "command": "hoot.refresh",
-          "when": "view == hootRef2",
+          "when": "view == hootRef",
+          "group": "navigation"
+        },
+        {
+          "command": "hoot.addCat",
+          "when": "view == hootRef",
           "group": "navigation"
         }
       ],
       "view/item/context": [
+        {
+          "command": "hoot.viewCat",
+          "when": "view==hootRef"
+        }
       ]
     },
     "views": {
-      "explorer": [
-        {
-          "id": "hootRef",
-          "name": "References"
-        }
-      ],
       "hoot":[
         {
-          "id": "hootRef2",
+          "id": "hootRef",
           "name": "References",
           "icon": "icon.svg",
           "contextualTitle": "References"
+        },
+        {
+          "type": "webview",
+          "id":"hoot.detailsView",
+          "name": "Details"
         }
       ]
     },
