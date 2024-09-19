@@ -16,16 +16,19 @@ const hootCommands = require("./commands")
 function activate(context) {
 	console.log(context.extensionPath)
 	console.log(context.extensionUri)
+	const dataPath = vscode.workspace.rootPath+'/project_db.json'
 	if (!fs.existsSync(vscode.workspace.rootPath+'/project_db.json')){
 		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','[]')
 	}
 
 	const detailsView = new detailView(context)
+	const dragDrop = new hootReference.dragDrop(dataPath)
 	const treeviewObj = new hootReference.hootReference(vscode.workspace.rootPath,detailsView)
 
 	vscode.window.registerTreeDataProvider('hootRef', treeviewObj)
     vscode.window.createTreeView('hootRef', {
-        treeDataProvider: treeviewObj
+        treeDataProvider: treeviewObj,
+		dragAndDropController:dragDrop
      });
 
 	 

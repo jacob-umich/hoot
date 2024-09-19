@@ -4,18 +4,49 @@ exports.hootReference = void 0;
 
 const vscode = require('vscode')
 const fs = require('fs')
+class dragDrop{
+    dropMimeTypes = ['application/vnd.code.tree.hootref'];
+    dragMimeTypes = ['text/uri-list'];
+    constructor(data_path){
+        this.data_path = data_path;
+    }
 
+    async handleDrop(target, sources, token){
+		const transferItem = sources.get('application/vnd.code.tree.hootref');
+		if (!transferItem) {
+			return;
+		}
+        console.log(transferItem.value)
+        /*
+		const treeItems: Node[] = transferItem.value;
+		let roots = this._getLocalRoots(treeItems);
+		// Remove nodes that are already target's parent nodes
+		roots = roots.filter(r => !this._isChild(this._getTreeElement(r.key), target));
+		if (roots.length > 0) {
+			// Reload parents of the moving elements
+			const parents = roots.map(r => this.getParent(r));
+			roots.forEach(r => this._reparentNode(r, target));
+			this._onDidChangeTreeData.fire([...parents, target]);
+		}
+        */
+	}
+
+	async handleDrag(source, treeDataTransfer, token){
+        console.log(source)
+		treeDataTransfer.set('application/vnd.code.tree.testViewDragAndDrop', new vscode.DataTransferItem(source));
+	}
+}
 class hootReference{
-  _onDidChangeTreeData = new vscode.EventEmitter();
-  onDidChangeTreeData = this._onDidChangeTreeData.event
-  constructor(root,detailview) {
-    this.root=root;
-    this.detailview=detailview
-    // re arrange data so category is on top
-  }
-  refresh(){
+    _onDidChangeTreeData = new vscode.EventEmitter();
+    onDidChangeTreeData = this._onDidChangeTreeData.event
+    constructor(root,detailview) {
+        this.root=root;
+        this.detailview=detailview
+        // re arrange data so category is on top
+    }
+    refresh(){
     this._onDidChangeTreeData.fire();
-  }
+    }
 
   
   getTreeItem(element) {
@@ -90,9 +121,12 @@ class hootReference{
     }
     return refs
     }
+
+
   // getCatItem()
 }
 exports.hootReference = hootReference;
+exports.dragDrop = dragDrop;
 
 class refCat extends vscode.TreeItem {
   constructor(
@@ -151,3 +185,7 @@ class refMeta extends vscode.TreeItem {
 //     this.description = this.version;
 //   }
 // }
+
+
+
+
