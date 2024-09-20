@@ -72,4 +72,4 @@ function save_db(data){
     fs.writeFileSync(db_path,JSON.stringify(data,null,4))
 }
 
-module.exports={addCategory,findArticle,viewItem,renameCategory};
+module.exports={addCategory,findArticle,viewItem,renameCategory,save_db};

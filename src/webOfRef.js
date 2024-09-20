@@ -2,38 +2,47 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hootReference = void 0;
 
+const hootCommands = require('./commands.js')
 const vscode = require('vscode')
 const fs = require('fs')
 class dragDrop{
     dropMimeTypes = ['application/vnd.code.tree.hootref'];
     dragMimeTypes = ['text/uri-list'];
     constructor(data_path){
-        this.data_path = data_path;
+        this.data = JSON.parse(fs.readFileSync(data_path))
     }
 
     async handleDrop(target, sources, token){
-		const transferItem = sources.get('application/vnd.code.tree.hootref');
+		const transferItem = sources.get('application/vnd.code.tree.hootref').value;
 		if (!transferItem) {
 			return;
 		}
-        console.log(transferItem.value)
-        /*
-		const treeItems: Node[] = transferItem.value;
-		let roots = this._getLocalRoots(treeItems);
-		// Remove nodes that are already target's parent nodes
-		roots = roots.filter(r => !this._isChild(this._getTreeElement(r.key), target));
-		if (roots.length > 0) {
-			// Reload parents of the moving elements
-			const parents = roots.map(r => this.getParent(r));
-			roots.forEach(r => this._reparentNode(r, target));
-			this._onDidChangeTreeData.fire([...parents, target]);
-		}
-        */
+        // get category id
+        let new_category
+        for (let i=0;i<this.data.categories.length;i++){
+            if (this.data.categories[i].name==target.label){
+                new_category=i
+                break
+            }
+        }
+
+        for (let i=0;i<transferItem.length;i++){
+            let item = transferItem[i];
+            for (let j=0;j<this.data.references.length;j++){
+                let old_item = this.data.references[j];
+                if (old_item.id==item.meta[1].id){
+                    old_item.category=new_category
+                }
+            }
+
+        }
+        hootCommands.save_db(this.data)
+        vscode.commands.executeCommand("hoot.refresh")
 	}
 
 	async handleDrag(source, treeDataTransfer, token){
         console.log(source)
-		treeDataTransfer.set('application/vnd.code.tree.testViewDragAndDrop', new vscode.DataTransferItem(source));
+		treeDataTransfer.set('application/vnd.code.tree.hootref', new vscode.DataTransferItem(source));
 	}
 }
 class hootReference{
