@@ -1,8 +1,9 @@
 {
   "name": "hoot",
   "displayName": "Hoot",
-  "description": "",
+  "description": "A refernce manager",
   "version": "0.0.1",
+  "repository": "https://github.com/jacob-umich/hoot",
   "engines": {
     "vscode": "^1.81.0"
   },
