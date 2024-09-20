@@ -2,13 +2,40 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="59.099552mm"
-   height="69.579781mm"
-   viewBox="0 0 59.099552 69.579781"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
    version="1.1"
    id="svg5"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="icons.svg"
+   inkscape:export-filename="icon.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.0544998"
+     inkscape:cx="342.81657"
+     inkscape:cy="342.81657"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="text1162" />
   <defs
      id="defs2">
     <marker
@@ -17,9 +44,12 @@
        refX="0"
        refY="0"
        orient="auto-start-reverse"
+       inkscape:stockid="Arrow4"
        markerWidth="5"
        markerHeight="6"
        viewBox="0 0 5 6"
+       inkscape:isstock="true"
+       inkscape:collect="always"
        preserveAspectRatio="xMidYMid">
       <path
          style="fill:context-stroke;fill-rule:evenodd;stroke:none"
@@ -28,12 +58,17 @@
     </marker>
   </defs>
   <g
-     id="layer1"
-     transform="translate(-18.321505,-17.211771)">
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
     <path
        style="fill:none;stroke:#000000;stroke-width:3.96875;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;stop-color:#000000"
        d="m 26.847247,22.079979 c 0,0 41.274507,-3.889087 45.414506,-2.634544 4.13999,1.254546 3.04226,5.927722 3.04226,6.680449 0,0.752726 -4.42226,52.283138 -4.92408,53.412218 -0.50182,1.1291 -40.521781,5.26909 -40.521781,5.26909 0,0 7.903631,-47.170865 6.147269,-55.576312 -1.756363,-8.405444 -8.405448,-6.774537 -9.409084,-7.025447 -1.003633,-0.250909 -6.398175,12.796352 -6.27272,14.050898 0.125455,1.254543 1.730269,3.959231 3.38727,3.638176 2.195454,-0.425384 7.025447,-6.774538 2.132724,-9.032719 L 36.25633,30.234517"
-       id="path292" />
+       id="path292"
+       sodipodi:nodetypes="cssscsssscc"
+       inkscape:export-filename="icon.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:3.96875;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;stop-color:#000000"
        d="M 24.021754,40.026729 36.005421,39.769054"
@@ -48,23 +83,31 @@
          style="font-style:italic;font-family:'Century Schoolbook';-inkscape-font-specification:'Century Schoolbook Italic';fill:#000000;stroke:none;stroke-width:3.96875;stroke-dasharray:none"
          id="path1217" />
       <path
-         style="fill:#ffffff;fill-opacity:1;stroke:#cecece;stroke-width:1.4;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow4);paint-order:stroke markers fill;stop-color:#000000"
+         style="fill:#ffffff;fill-opacity:1;stroke:#cecece;stroke-width:1.4;stroke-linejoin:round;stroke-opacity:1;marker-start:url(#Arrow4);paint-order:stroke markers fill;stop-color:#000000;stroke-dasharray:none"
          d="M 130.4726,38.174024 V 67.830288"
-         id="path291" />
+         id="path291"
+         inkscape:export-filename="refresh.svg"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
       <path
-         style="fill:#ffffff;fill-opacity:1;stroke:#cecece;stroke-width:1.4;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow4);paint-order:stroke markers fill;stop-color:#000000"
-         d="M 146.43741,66.729334 V 37.073078"
+         style="fill:#ffffff;fill-opacity:1;stroke:#cecece;stroke-width:1.4;stroke-linejoin:round;stroke-opacity:1;marker-start:url(#Arrow4);paint-order:stroke markers fill;stop-color:#000000;stroke-dasharray:none"
+         d="m 146.43741,66.729334 0,-29.656256"
          id="path2618" />
       <path
          id="rect1"
          style="fill:none;stroke-width:3.96875;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
-         d="m 155.56375,96.308246 -3.76363,4.265894 c -4.58596,0 -39.39291,0 -39.39291,0 v 45.41428 h 62.22514 v -45.41428 h -3.26181 v -4.265894 z" />
+         d="m 155.56375,96.308246 -3.76363,4.265894 c -4.58596,0 -39.39291,0 -39.39291,0 v 45.41428 h 62.22514 v -45.41428 h -3.26181 v -4.265894 z"
+         sodipodi:nodetypes="ccccccccc"
+         inkscape:export-filename=".\addCat.svg"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
       <text
          xml:space="preserve"
          style="font-size:44.0298px;line-height:normal;font-family:Consolas;-inkscape-font-specification:Consolas;text-decoration-color:#000000;fill:#000000;fill-opacity:1;stroke:none;stroke-width:8.84526;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
          x="113.88028"
          y="125.91112"
          id="text2"><tspan
+           sodipodi:role="line"
            id="tspan2"
            style="font-size:44.0298px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:8.84526"
            x="113.88028"

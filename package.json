@@ -10,79 +10,104 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "hoot.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "hoot.findArticle",
         "title": "Search Articles"
       },
       {
-        "command": "nodeDependencies.refreshEntry",
+        "command": "hoot.addArticle",
+        "title": "Add Articles",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
+        }
+      },
+      {
+        "command": "hoot.refresh",
         "title": "Refresh",
-        "icon": {
-          "light": "resources/light/refresh.svg",
-          "dark": "resources/dark/refresh.svg"
+        "icon":{
+          "dark": "refresh.svg",
+          "light": "refresh.svg"
         }
       },
       {
-        "command": "nodeDependencies.addEntry",
-        "title": "Add"
-      },
-      {
-        "command": "nodeDependencies.editEntry",
-        "title": "Edit",
-        "icon": {
-          "light": "resources/light/edit.svg",
-          "dark": "resources/dark/edit.svg"
+        "command": "hoot.addBibs",
+        "title": "Import Bib",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
         }
       },
       {
-        "command": "nodeDependencies.deleteEntry",
-        "title": "Delete"
+        "command": "hoot.viewCat",
+        "title": "View",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
+        }
+      },
+      {
+        "command": "hoot.editCat",
+        "title": "Edit Category",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
+        }
+      },
+      {
+        "command": "hoot.addCat",
+        "title": "Add Category",
+        "icon":{
+          "dark": "addCat.svg",
+          "light": "addCat.svg"
+        }
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "nodeDependencies.refreshEntry",
-          "when": "view == nodeDependencies",
+          "command": "hoot.addArticle",
+          "when": "view == hootRef",
           "group": "navigation"
         },
         {
-          "command": "nodeDependencies.addEntry",
-          "when": "view == nodeDependencies"
+          "command": "hoot.addBibs",
+          "when": "view == hootRef",
+          "group": "navigation"
+        },
+        {
+          "command": "hoot.refresh",
+          "when": "view == hootRef",
+          "group": "navigation"
+        },
+        {
+          "command": "hoot.addCat",
+          "when": "view == hootRef",
+          "group": "navigation"
         }
       ],
       "view/item/context": [
         {
-          "command": "nodeDependencies.editEntry",
-          "when": "view == nodeDependencies && viewItem == dependency",
-          "group": "inline"
-        },
-        {
-          "command": "nodeDependencies.deleteEntry",
-          "when": "view == nodeDependencies && viewItem == dependency"
+          "command": "hoot.viewCat",
+          "when": "view==hootRef"
         }
       ]
     },
     "views": {
-      "explorer": [
-        {
-          "id": "hootRef",
-          "name": "References"
-        }
-      ],
       "hoot":[
         {
-          "id": "hootRef2",
+          "id": "hootRef",
           "name": "References",
           "icon": "icon.svg",
           "contextualTitle": "References"
+        },
+        {
+          "type": "webview",
+          "id":"hoot.detailsView",
+          "name": "Details"
         }
       ]
     },
