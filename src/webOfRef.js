@@ -9,10 +9,11 @@ class dragDrop{
     dropMimeTypes = ['application/vnd.code.tree.hootref'];
     dragMimeTypes = ['text/uri-list'];
     constructor(data_path){
-        this.data = JSON.parse(fs.readFileSync(data_path))
+        this.data_path = data_path
     }
 
     async handleDrop(target, sources, token){
+        this.data = JSON.parse(fs.readFileSync(this.data_path))
 		const transferItem = sources.get('application/vnd.code.tree.hootref').value;
 		if (!transferItem) {
 			return;

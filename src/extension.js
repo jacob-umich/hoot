@@ -18,7 +18,7 @@ function activate(context) {
 	console.log(context.extensionUri)
 	const dataPath = vscode.workspace.rootPath+'/project_db.json'
 	if (!fs.existsSync(vscode.workspace.rootPath+'/project_db.json')){
-		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','[]')
+		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','{"categories":[],"references":[]}')
 	}
 
 	const detailsView = new detailView(context)
