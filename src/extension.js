@@ -44,6 +44,7 @@ function activate(context) {
 	});
 	let viewCatCommand = vscode.commands.registerCommand('hoot.viewCat',hootCommands.viewItem)
 	let editCatCommand = vscode.commands.registerCommand('hoot.editCat',hootCommands.renameCategory)
+	let showNotesCommand = vscode.commands.registerCommand('hoot.showNotes',hootCommands.openNote)
 	vscode.commands.registerCommand('hoot.addCat',hootCommands.addCategory)
 	context.subscriptions.push(detailViewRegister);
 	context.subscriptions.push(findArticleComm);

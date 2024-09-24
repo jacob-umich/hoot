@@ -72,4 +72,22 @@ function save_db(data){
     fs.writeFileSync(db_path,JSON.stringify(data,null,4))
 }
 
-module.exports={addCategory,findArticle,viewItem,renameCategory,save_db};
+async function  openNote(item){
+    let notesDir = vscode.workspace.rootPath+'/project_db/notes'
+    let notePath = notesDir+`/${item.label}.md`
+    // check if notes exists
+    if (!fs.existsSync(notePath)){
+		fs.writeFileSync(notePath,'# Short Description\n\n # Relevance \n\n # Details')
+	}
+    let file = await vscode.workspace.openTextDocument(notePath)
+    vscode.window.showTextDocument(file, column=vscode.ViewColumn.Active)
+}
+
+module.exports={
+    addCategory,
+    findArticle,
+    viewItem,
+    renameCategory,
+    save_db,
+    openNote
+};

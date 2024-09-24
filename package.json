@@ -65,6 +65,14 @@
           "dark": "addCat.svg",
           "light": "addCat.svg"
         }
+      },
+      {
+        "command": "hoot.showNotes",
+        "title": "Open Notes",
+        "icon":{
+          "dark": "icon.svg",
+          "light": "icon.svg"
+        }
       }
     ],
     "menus": {
@@ -93,6 +101,10 @@
       "view/item/context": [
         {
           "command": "hoot.viewCat",
+          "when": "view==hootRef"
+        },
+        {
+          "command": "hoot.showNotes",
           "when": "view==hootRef"
         }
       ]
