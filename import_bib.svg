@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 99.999998"
+   version="1.1"
+   id="svg5"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs2" /><g
+     id="layer1"
+     transform="translate(-550)"><rect
+       style="fill:#529343;fill-opacity:0;stroke-width:3.16899;stroke-linejoin:round;paint-order:stroke markers fill"
+       id="rect10"
+       width="99.999992"
+       height="100"
+       x="550"
+       y="0" /><path
+       id="path19"
+       style="font-size:50.8px;font-family:Calibri;-inkscape-font-specification:Calibri;word-spacing:0.341312px;white-space:pre;inline-size:42.623;fill:none;stroke:#d8d8d8;stroke-width:4.29198;stroke-linejoin:round;paint-order:stroke markers fill"
+       d="m 564.38571,32.759925 v 64.065073 h 65.93422 V 28.951633 L 607.88882,9.8191883 571.01299,9.6490933" /><path
+       style="font-size:50.8px;font-family:Calibri;-inkscape-font-specification:Calibri;word-spacing:0.341312px;white-space:pre;inline-size:42.623;fill:none;stroke:#d8d8d8;stroke-width:4.29198;stroke-linejoin:round;paint-order:stroke markers fill"
+       d="m 607.88843,9.8190193 22.4315,19.7120747 h -23.45087 z"
+       id="path20" /><text
+       xml:space="preserve"
+       style="font-size:44.0298px;line-height:normal;font-family:Consolas;-inkscape-font-specification:Consolas;text-decoration-color:#000000;word-spacing:0.341312px;white-space:pre;inline-size:42.623;display:inline;fill:#d8d8d8;fill-opacity:1;stroke:none;stroke-width:8.84526;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
+       x="19.789461"
+       y="227.78012"
+       id="text20"
+       transform="matrix(1.3545369,0,0,1.3545369,521.56245,-277.65217)"><tspan
+         x="19.789461"
+         y="227.78012"
+         id="tspan1">+</tspan></text><text
+       xml:space="preserve"
+       style="font-size:43.6635px;line-height:normal;font-family:Consolas;-inkscape-font-specification:Consolas;text-decoration-color:#000000;fill:#529343;fill-opacity:1;stroke:none;stroke-width:5.44874;stroke-linejoin:round;paint-order:stroke markers fill"
+       x="549.34949"
+       y="93.975517"
+       id="text7"><tspan
+         id="tspan7"
+         style="font-weight:bold;font-size:43.6635px;fill:#529343;fill-opacity:1;stroke-width:5.44875"
+         x="549.34949"
+         y="93.975517">.bib</tspan></text></g></svg>

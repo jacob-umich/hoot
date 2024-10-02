@@ -44,6 +44,7 @@ class dragDrop{
 	async handleDrag(source, treeDataTransfer, token){
         console.log(source)
 		treeDataTransfer.set('application/vnd.code.tree.hootref', new vscode.DataTransferItem(source));
+		treeDataTransfer.set('text/uri-list', "test_1");
 	}
 }
 class hootReference{
@@ -153,22 +154,26 @@ class refCat extends vscode.TreeItem {
 }
 exports.refCat=refCat
 class topRef extends vscode.TreeItem {
-  constructor(
-    data,
-    collapsibleState
-  ) {
-    let label = data['nickname']
-    super(label, collapsibleState);
-    this.meta = [
-      {author:data["author"]},
-      {id:data["id"]},
-      {title:data["title"]},
-      {year:data["year"]},
-      {journal:data["journal"]},
-      {pdfPath:data["pdfPath"]},
-      {tags:data["tags"]},
-    ]
-  }
+    constructor(
+        data,
+        collapsibleState
+    ) {
+        let label = data['nickname']
+        super(label, collapsibleState);
+        this.meta = [
+        {author:data["author"]},
+        {id:data["id"]},
+        {title:data["title"]},
+        {year:data["year"]},
+        {journal:data["journal"]},
+        {pdfPath:data["pdfPath"]},
+        {tags:data["tags"]},
+        ]
+    }
+
+    asString(){
+        return "test"
+    }
 }
 
 class refMeta extends vscode.TreeItem {

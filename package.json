@@ -16,14 +16,18 @@
     "commands": [
       {
         "command": "hoot.findArticle",
-        "title": "Search Articles"
+        "title": "Search Articles",
+        "icon":{
+          "dark": "article_search.svg",
+          "light": "article_search.svg"
+        }
       },
       {
         "command": "hoot.addArticle",
         "title": "Add Articles",
         "icon":{
-          "dark": "icon.svg",
-          "light": "icon.svg"
+          "dark": "import_ref.svg",
+          "light": "import_ref.svg"
         }
       },
       {
@@ -36,10 +40,10 @@
       },
       {
         "command": "hoot.addBibs",
-        "title": "Import Bib",
+        "title": "Import .bib file",
         "icon":{
-          "dark": "icon.svg",
-          "light": "icon.svg"
+          "dark": "import_bib.svg",
+          "light": "import_bib.svg"
         }
       },
       {
@@ -70,8 +74,8 @@
         "command": "hoot.showNotes",
         "title": "Open Notes",
         "icon":{
-          "dark": "icon.svg",
-          "light": "icon.svg"
+          "dark": "open_notes.svg",
+          "light": "open_notes.svg"
         }
       }
     ],
@@ -105,7 +109,8 @@
         },
         {
           "command": "hoot.showNotes",
-          "when": "view==hootRef"
+          "when": "view==hootRef",
+          "group": "inline"
         }
       ]
     },
