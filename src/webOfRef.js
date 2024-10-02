@@ -5,8 +5,57 @@ exports.hootReference = void 0;
 const hootCommands = require('./commands.js')
 const vscode = require('vscode')
 const fs = require('fs')
+
+const documentDropEditProvider = {
+    async provideDocumentDropEdits(document, position, dataTransfer) {
+        let textItem
+        for (const [mime, item] of dataTransfer) {
+            if (mime === 'text/uri-list') {
+                const file = await item.asString()
+                let parts = file.split('/')
+                let name = parts[parts.length-1].slice(0,-3)
+                return {
+                    insertText: '\\cite{' + name + '}',
+                }
+            }
+
+            // make sure reference is in bib
+
+            // if (mime === 'text/plain') {
+            //     textItem = item
+            //     continue
+            // }
+            // if (!mime.startsWith('image/')) {
+            //     continue
+            // }
+            // const file = item.asFile()
+            // if (!file) {
+            //     continue
+            // }
+            // const additionalEdit = new WorkspaceEdit()
+            // additionalEdit.createFile(Uri.joinPath(document.uri, '..', file.name), {
+            //     contents: file,
+            //     ignoreIfExists: true
+            // })
+            // return {
+            //     insertText: '![](' + file.name + ')',
+            //     additionalEdit
+            // }
+        }
+        // if (textItem) {
+        //     const string = await textItem.asString()
+        //     return {insertText: string}
+        // }
+        // return {
+        //     insertText: ''
+        // }
+    }
+}
+
+
+
 class dragDrop{
-    dropMimeTypes = ['application/vnd.code.tree.hootref'];
+    dropMimeTypes = ['application/vnd.code.tree.hootref','test/uri-list'];
     dragMimeTypes = ['text/uri-list'];
     constructor(data_path){
         this.data_path = data_path
@@ -43,8 +92,11 @@ class dragDrop{
 
 	async handleDrag(source, treeDataTransfer, token){
         console.log(source)
+        let file_name = `${source[0].label}.md`
+        let path = vscode.workspace.rootPath +"/project_db/notes/"+file_name
+        let uri = vscode.Uri.file(path).toString()
 		treeDataTransfer.set('application/vnd.code.tree.hootref', new vscode.DataTransferItem(source));
-		treeDataTransfer.set('text/uri-list', "test_1");
+		treeDataTransfer.set('text/uri-list', new vscode.DataTransferItem(uri));
 	}
 }
 class hootReference{
@@ -138,6 +190,7 @@ class hootReference{
 }
 exports.hootReference = hootReference;
 exports.dragDrop = dragDrop;
+exports.docudrop = documentDropEditProvider
 
 class refCat extends vscode.TreeItem {
   constructor(

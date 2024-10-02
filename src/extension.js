@@ -50,6 +50,7 @@ function activate(context) {
 	context.subscriptions.push(findArticleComm);
 	context.subscriptions.push(addArticleComm);
 	context.subscriptions.push(addBibsComm);
+	context.subscriptions.push(vscode.languages.registerDocumentDropEditProvider({language:"latex"},hootReference.docudrop))
 }
 
 function deactivate() {

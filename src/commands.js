@@ -2,6 +2,8 @@ const vscode = require('vscode')
 const fs = require('fs')
 // const hootTree = require('./webOfRef')
 
+
+
 async function findArticle(){
     let search = await vscode.window.showInputBox({prompt:'enter in search params'})
     let resp = await getJson({
@@ -77,7 +79,7 @@ async function  openNote(item){
     let notePath = notesDir+`/${item.label}.md`
     // check if notes exists
     if (!fs.existsSync(notePath)){
-		fs.writeFileSync(notePath,'# Short Description\n\n # Relevance \n\n # Details')
+		fs.writeFileSync(notePath,'# Short Description\n\n# Relevance \n\n# Details')
 	}
     let file = await vscode.workspace.openTextDocument(notePath)
     vscode.window.showTextDocument(file, column=vscode.ViewColumn.Active)
