@@ -108,7 +108,7 @@ class hootReference{
         // re arrange data so category is on top
     }
     refresh(){
-    this._onDidChangeTreeData.fire();
+        this._onDidChangeTreeData.fire();
     }
 
   
@@ -125,6 +125,8 @@ class hootReference{
       return Promise.resolve(this.getRefMeta(element.meta));
     } else if (element instanceof refCat){
       return Promise.resolve(this.getRefItems(element));
+    } else if (element instanceof refMeta){
+        return Promise.resolve(this.getNotes(element));
     } else {
       // root case
       this.data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath +"/project_db.json"))
@@ -145,26 +147,6 @@ class hootReference{
     } 
     return cats
   }
-
-  getRefMeta(ref){
-    const toMeta = (obj)=>{
-      let state
-      if (obj["notes"]||obj["inlineNotes"]||obj["refs"]){
-        state = vscode.TreeItemCollapsibleState.Collapsed
-      } else
-      state = vscode.TreeItemCollapsibleState.None
-      return new refMeta(
-        Object.keys(obj)[0],
-        obj[Object.keys(obj)[0]],
-        state
-      )
-    }
-    let meta = new Array
-    for (let dataRef in ref){
-      meta.push(toMeta(ref[dataRef]))
-    }
-    return meta
-  }
   getRefItems(category) {
     const toRep = (data)=> {
       return new topRef(
@@ -183,7 +165,40 @@ class hootReference{
       }
     }
     return refs
+  }
+  getRefMeta(ref_meta_array){
+    const toMeta = (obj)=>{
+      let state
+      if (obj["notes"]||obj["inlineNotes"]||obj["refs"]){
+        state = vscode.TreeItemCollapsibleState.Collapsed
+      } else
+      state = vscode.TreeItemCollapsibleState.None
+      return new refMeta(
+        Object.keys(obj)[0],
+        obj[Object.keys(obj)[0]],
+        state
+      )
     }
+    let meta = new Array
+    for (let meta_field in ref_meta_array){
+      meta.push(toMeta(ref_meta_array[meta_field]))
+    }
+    return meta
+  }
+  getNotes(notesArray){
+    const toRefNote = (obj)=>{
+      return new refNote(
+        Object.keys(obj)[0],
+        obj[Object.keys(obj)[0]],
+      )
+    }
+    let notes = new Array
+    for (let note_type in notesArray.meta){
+      notes.push(toRefNote(notesArray.meta[note_type]))
+    }
+    return notes
+  }
+
 
 
   // getCatItem()
@@ -203,6 +218,7 @@ class refCat extends vscode.TreeItem {
     super(label, collapsibleState);
     this.detailview=detailview;
     this.id=id
+    this.contextValue = "refCat"
   }
 }
 exports.refCat=refCat
@@ -213,15 +229,17 @@ class topRef extends vscode.TreeItem {
     ) {
         let label = data['nickname']
         super(label, collapsibleState);
+        this.tooltip = `${data["title"]} | ${data["author"]}`
         this.meta = [
-        {author:data["author"]},
-        {id:data["id"]},
-        {title:data["title"]},
-        {year:data["year"]},
-        {journal:data["journal"]},
-        {pdfPath:data["pdfPath"]},
-        {tags:data["tags"]},
+            {notes:data["notes"]},
+            {author:data["author"]},
+            {title:data["title"]},
+            {year:data["year"]},
+            {journal:data["journal"]},
+            {tags:data["tags"]},
+            {id:data["id"]},
         ]
+        this.contextValue = "topRef"
     }
 
     asString(){
@@ -236,6 +254,18 @@ class refMeta extends vscode.TreeItem {
     collapsibleState
   ) {
     super(field, collapsibleState);
+    this.meta=meta;
+    this.field=field;
+    this.tooltip = `${this.meta}`;
+    this.description = this.meta;
+  }
+}
+class refNote extends vscode.TreeItem {
+  constructor(
+    field,
+    meta,
+  ) {
+    super(field, vscode.TreeItemCollapsibleState.None);
     this.meta=meta;
     this.field=field;
     this.tooltip = `${this.meta}`;

@@ -79,10 +79,47 @@ async function  openNote(item){
     let notePath = notesDir+`/${item.label}.md`
     // check if notes exists
     if (!fs.existsSync(notePath)){
-		fs.writeFileSync(notePath,'# Short Description\n\n# Relevance \n\n# Details')
+		fs.writeFileSync(notePath,'# Short Description\n\n\n\n\n# Relevance \n\n\n\n\n# Details')
 	}
     let file = await vscode.workspace.openTextDocument(notePath)
     vscode.window.showTextDocument(file, column=vscode.ViewColumn.Active)
+}
+
+async function  openPDF(item){
+    let notesDir = vscode.workspace.rootPath+'/project_db/articles'
+    let notePath = notesDir+`/${item.label}.pdf`
+    let uri = vscode.Uri.file(notePath)
+    await vscode.commands.executeCommand("vscode.open",uri)
+}
+
+async function savePDF(item){
+    let dlUrl = await vscode.window.showInputBox({prompt:'enter download url'})
+    let dlreq = Request(dlUrl)
+    let notesDir = vscode.workspace.rootPath+'/project_db/articles'
+    let notePath = notesDir+`/${item.label}.pdf`
+    let writeStream = fs.createWriteStream(notePath)
+    const pdf = fetch(dlreq).then( (res) => {
+        if (res.ok){
+            return res.blob()
+        }
+    }).then((data)=>{
+        return data.stream().pipeTo(writeStream)
+    }).then((state)=>{
+        writeStream.close()
+    })
+}
+
+function getPDFSavePath(item){
+    let notesDir = vscode.workspace.rootPath+'\\project_db\\articles'
+    let notePath = notesDir+`\\${item.label}.pdf`
+    vscode.env.clipboard.writeText(notePath).then(()=>console.log("copied path"))
+    
+    return notePath
+}
+
+function copyTitle(item){
+    let output = `${item.meta[2].title}`
+    vscode.env.clipboard.writeText(output).then(()=>console.log("copied path"))
 }
 
 module.exports={
@@ -91,5 +128,9 @@ module.exports={
     viewItem,
     renameCategory,
     save_db,
-    openNote
+    openNote,
+    openPDF,
+    savePDF,
+    getPDFSavePath,
+    copyTitle
 };

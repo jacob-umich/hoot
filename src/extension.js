@@ -8,12 +8,14 @@ const hootReference = require("./webOfRef")
 const detailView = require("./webviewtest")
 const {addBib,loadAllBibs}=require("./addArticle"); 
 const hootCommands = require("./commands")
+const hootListeners = require("./listeners")
 
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	console.log("here")
 	console.log(context.extensionPath)
 	console.log(context.extensionUri)
 	const dataPath = vscode.workspace.rootPath+'/project_db.json'
@@ -45,6 +47,10 @@ function activate(context) {
 	let viewCatCommand = vscode.commands.registerCommand('hoot.viewCat',hootCommands.viewItem)
 	let editCatCommand = vscode.commands.registerCommand('hoot.editCat',hootCommands.renameCategory)
 	let showNotesCommand = vscode.commands.registerCommand('hoot.showNotes',hootCommands.openNote)
+	let showPDFCommand = vscode.commands.registerCommand('hoot.showPDF',hootCommands.openPDF)
+	let savePDFCommand = vscode.commands.registerCommand('hoot.savePDF',hootCommands.savePDF)
+	let PDFPathCommand = vscode.commands.registerCommand('hoot.PDFPath',hootCommands.getPDFSavePath)
+	let copyTitleCommand = vscode.commands.registerCommand('hoot.copyTitle',hootCommands.copyTitle)
 	vscode.commands.registerCommand('hoot.addCat',hootCommands.addCategory)
 	context.subscriptions.push(detailViewRegister);
 	context.subscriptions.push(findArticleComm);

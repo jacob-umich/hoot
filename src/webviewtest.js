@@ -70,7 +70,6 @@ class DetailsViewProvider {
 		mainHtml=mainHtml.replace("vscode_css",styleVSCodeUri)
 		mainHtml=mainHtml.replace("main_css",styleMainUri)
 		mainHtml=mainHtml.replace("main_js",scriptUri)
-		console.log(mainHtml)
 		return mainHtml
 	}
 }

@@ -17,7 +17,7 @@
       {
         "command": "hoot.findArticle",
         "title": "Search Articles",
-        "icon":{
+        "icon": {
           "dark": "article_search.svg",
           "light": "article_search.svg"
         }
@@ -25,7 +25,7 @@
       {
         "command": "hoot.addArticle",
         "title": "Add Articles",
-        "icon":{
+        "icon": {
           "dark": "import_ref.svg",
           "light": "import_ref.svg"
         }
@@ -33,7 +33,7 @@
       {
         "command": "hoot.refresh",
         "title": "Refresh",
-        "icon":{
+        "icon": {
           "dark": "refresh.svg",
           "light": "refresh.svg"
         }
@@ -41,7 +41,7 @@
       {
         "command": "hoot.addBibs",
         "title": "Import .bib file",
-        "icon":{
+        "icon": {
           "dark": "import_bib.svg",
           "light": "import_bib.svg"
         }
@@ -49,7 +49,7 @@
       {
         "command": "hoot.viewCat",
         "title": "View",
-        "icon":{
+        "icon": {
           "dark": "icon.svg",
           "light": "icon.svg"
         }
@@ -57,7 +57,7 @@
       {
         "command": "hoot.editCat",
         "title": "Edit Category",
-        "icon":{
+        "icon": {
           "dark": "icon.svg",
           "light": "icon.svg"
         }
@@ -65,7 +65,7 @@
       {
         "command": "hoot.addCat",
         "title": "Add Category",
-        "icon":{
+        "icon": {
           "dark": "addCat.svg",
           "light": "addCat.svg"
         }
@@ -73,7 +73,39 @@
       {
         "command": "hoot.showNotes",
         "title": "Open Notes",
-        "icon":{
+        "icon": {
+          "dark": "open_notes.svg",
+          "light": "open_notes.svg"
+        }
+      },
+      {
+        "command": "hoot.showPDF",
+        "title": "Open PDF",
+        "icon": {
+          "dark": "open_pdf.svg",
+          "light": "open_pdf.svg"
+        }
+      },
+      {
+        "command": "hoot.savePDF",
+        "title": "Save PDF from URL",
+        "icon": {
+          "dark": "open_notes.svg",
+          "light": "open_notes.svg"
+        }
+      },
+      {
+        "command": "hoot.PDFPath",
+        "title": "Get PDF save path",
+        "icon": {
+          "dark": "open_notes.svg",
+          "light": "open_notes.svg"
+        }
+      },
+      {
+        "command": "hoot.copyTitle",
+        "title": "Copy title to clipboard",
+        "icon": {
           "dark": "open_notes.svg",
           "light": "open_notes.svg"
         }
@@ -105,17 +137,34 @@
       "view/item/context": [
         {
           "command": "hoot.viewCat",
-          "when": "view==hootRef"
+          "when": "viewItem==refCat"
+        },
+        {
+          "command": "hoot.PDFPath",
+          "when": "viewItem==topRef"
         },
         {
           "command": "hoot.showNotes",
-          "when": "view==hootRef",
+          "when": "viewItem==topRef",
           "group": "inline"
+        },
+        {
+          "command": "hoot.showPDF",
+          "when": "viewItem==topRef",
+          "group": "inline"
+        },
+        {
+          "command": "hoot.savePDF",
+          "when": "viewItem==topRef"
+        },
+        {
+          "command": "hoot.copyTitle",
+          "when": "viewItem==topRef"
         }
       ]
     },
     "views": {
-      "hoot":[
+      "hoot": [
         {
           "id": "hootRef",
           "name": "References",
@@ -124,7 +173,7 @@
         },
         {
           "type": "webview",
-          "id":"hoot.detailsView",
+          "id": "hoot.detailsView",
           "name": "Details"
         }
       ]
@@ -134,7 +183,7 @@
         {
           "id": "hoot",
           "title": "hoot",
-          "icon":"icon.svg"
+          "icon": "icon.svg"
         }
       ]
     }
@@ -156,6 +205,7 @@
     "typescript": "^5.1.3"
   },
   "dependencies": {
+    "pdfjs-dist": "^4.9.155",
     "serpapi": "^2.0.0"
   }
 }
