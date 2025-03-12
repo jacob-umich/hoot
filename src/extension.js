@@ -15,12 +15,17 @@ const hootListeners = require("./listeners")
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	console.log("here")
-	console.log(context.extensionPath)
-	console.log(context.extensionUri)
 	const dataPath = vscode.workspace.rootPath+'/project_db.json'
 	if (!fs.existsSync(vscode.workspace.rootPath+'/project_db.json')){
 		fs.writeFileSync(vscode.workspace.rootPath+'/project_db.json','{"categories":[],"references":[]}')
+	}
+	const note_dir = vscode.workspace.rootPath+"/project_db/notes"
+	if (!fs.existsSync(note_dir)){
+		fs.mkdirSync(note_dir, { recursive: true });
+	}
+	const article_dir = vscode.workspace.rootPath+"/project_db/articles"
+	if (!fs.existsSync(article_dir)){
+		fs.mkdirSync(article_dir, { recursive: true });
 	}
 
 	const detailsView = new detailView(context)
