@@ -80,7 +80,7 @@ class dragDrop{
             let item = transferItem[i];
             for (let j=0;j<this.data.references.length;j++){
                 let old_item = this.data.references[j];
-                if (old_item.id==item.meta[1].id){
+                if (old_item.id==item.meta[6].id){
                     old_item.category=new_category
                 }
             }
@@ -91,7 +91,7 @@ class dragDrop{
 	}
 
 	async handleDrag(source, treeDataTransfer, token){
-        console.log(source)
+
         let file_name = `${source[0].label}.md`
         let path = vscode.workspace.rootPath +"/project_db/notes/"+file_name
         let uri = vscode.Uri.file(path).toString()
@@ -130,6 +130,11 @@ class hootReference{
     } else {
       // root case
       this.data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath +"/project_db.json"))
+      // ensure a category exists
+      if (this.data["categories"].length<1){
+        this.data["categories"].push({name:"Uncategorized"})
+        hootCommands.save_db(this.data)
+      }
 
       return Promise.resolve(this.getRefCategory());
     }
