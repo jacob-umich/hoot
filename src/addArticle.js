@@ -44,13 +44,21 @@ async function  addBib(db_path,treeviewObj,bib=undefined){
         bib = await vscode.window.showInputBox({prompt:'enter new article bib'});
     }
     let id = generateUUID()
+
+    let author = bib.match(/author={(?<author>[\S ]+?)},?\n/)?.groups?.author
+    let title = bib.match(/title={(?<title>[\S ]+?)},/)?.groups?.title
+    let year = bib.match(/year={(?<year>[\S ]+?)},/)?.groups?.year
+    let journal = bib.match(/journal={(?<journal>[\S ]+?)},/)?.groups?.journal
+
+    let nickname = bib.match(/@[\S]+{(?<nickname>\w+),?/)?.groups.nickname
+
     let newData = {
-        nickname:bib.match(/@[\S]+{(?<nickname>\w+),/).groups.nickname,
-        author:bib.match(/author={(?<author>[\S ]+?)},/).groups.author,
+        nickname:nickname,
+        author:author ? author:"",
         id:id,
-        title:bib.match(/title={(?<title>[\S ]+?)},/).groups.title,
-        year:bib.match(/year={(?<year>[\S ]+?)},/).groups.year,
-        journal:bib.match(/journal={(?<journal>[\S ]+?)},/).groups?.journal,
+        title:title ? title:"" ,
+        year:year ? year:"",
+        journal:journal ? journal:"",
         pdfPath:"",
         abstract:"",
         notes:[],
