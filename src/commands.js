@@ -122,6 +122,17 @@ function copyTitle(item){
     vscode.env.clipboard.writeText(output).then(()=>console.log("copied path"))
 }
 
+function savebib(){
+    let data = JSON.parse(fs.readFileSync(vscode.workspace.rootPath+'/project_db.json','utf-8'))
+    let out_data = new Array
+    data.references.forEach(element => {
+        out_data.push(element?.bibtex)
+    });
+    let out_str = out_data.join("\n")
+    let bib_path = vscode.workspace.rootPath+'/writing/refs.bib'
+    fs.writeFileSync(bib_path,out_str)
+}
+
 module.exports={
     addCategory,
     findArticle,
@@ -132,5 +143,6 @@ module.exports={
     openPDF,
     savePDF,
     getPDFSavePath,
-    copyTitle
+    copyTitle,
+    savebib
 };

@@ -56,6 +56,7 @@ function activate(context) {
 	let savePDFCommand = vscode.commands.registerCommand('hoot.savePDF',hootCommands.savePDF)
 	let PDFPathCommand = vscode.commands.registerCommand('hoot.PDFPath',hootCommands.getPDFSavePath)
 	let copyTitleCommand = vscode.commands.registerCommand('hoot.copyTitle',hootCommands.copyTitle)
+	let savebibCommand = vscode.commands.registerCommand('hoot.savebib',hootCommands.savebib)
 	vscode.commands.registerCommand('hoot.addCat',hootCommands.addCategory)
 	context.subscriptions.push(detailViewRegister);
 	context.subscriptions.push(findArticleComm);

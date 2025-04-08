@@ -109,6 +109,14 @@
           "dark": "open_notes.svg",
           "light": "open_notes.svg"
         }
+      },
+      {
+        "command": "hoot.savebib",
+        "title": "Save references to .bib file",
+        "icon": {
+          "dark": "open_notes.svg",
+          "light": "open_notes.svg"
+        }
       }
     ],
     "menus": {
